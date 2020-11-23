@@ -45,7 +45,6 @@ export class ClienteComponent implements OnInit {
           : empty()
         )
       )
-      //.subscribe((dados: { logradouro: any; complemento: any; bairro: any; localidade: any; uf: any; }) => dados ? this.populaDadosForm(dados) : {});
   }
 
   populaDadosForm(dados: any) {
