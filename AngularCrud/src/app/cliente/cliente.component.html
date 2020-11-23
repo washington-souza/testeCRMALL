@@ -1,0 +1,150 @@
+<div class="container">  
+    <mat-card>
+    <br><br>
+      <mat-card-content>
+        <form [formGroup]="clienteForm"(ngSubmit)="onFormSubmit()">
+                <table>
+                  <tr>
+                    <td class="tbl1">
+                      <mat-form-field class="demo-full-width">
+                        <input formControlName="Nome" matTooltip="Informe o nome do nome do cliente" matInput placeholder="Nome do cliente:">
+                      </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="!clienteForm.get('Nome').value && clienteForm.get('Nome').touched"></span>
+                      </mat-error>
+                    </td>
+                    <td class="tbl1">
+                      <mat-form-field class="demo-full-width">
+                        <input matInput [matDatepicker]="picker"matTooltip="Informe a data de nascimento" formControlName="DataDeNascimento"placeholder="Data de nascimento:">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="!clienteForm.get('DataDeNascimento').value && clienteForm.get('DataDeNascimento').touched"></span>
+                      </mat-error>
+                    </td>
+                    <td class="tbl1">  
+                        <span>Sexo</span>  
+                        <br><br>  
+                        <mat-radio-group matTooltip="Informe o sexo"formControlName="Sexo">  
+                            <mat-radio-button value="0">Masculino</mat-radio-button>    
+                            <mat-radio-button value="1">Feminino</mat-radio-button>  
+                          </mat-radio-group>  
+                        <mat-error>  
+                          <span *ngIf="!clienteForm.get('Sexo').value && clienteForm.get('Sexo').touched"></span>  
+                        </mat-error>  
+                      </td>
+                  </tr>  
+                  <tr> 
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width">
+                          <input formControlName="CEP" matTooltip="Informe o cep" matInput placeholder="CEP:" (blur)="consultaCEP($event.target)">
+                        </mat-form-field>
+                        <mat-error>  
+                          <span *ngIf="!clienteForm.get('CEP').value && clienteForm.get('CEP').touched"></span>  
+                        </mat-error>  
+                      </td>
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input matTooltip="Informe o endereço"formControlName="Endereco" matInput placeholder="Endereço:">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!clienteForm.get('Endereco').value && clienteForm.get('Endereco').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="Numero" matTooltip="Informe o número" matInput placeholder="Número:">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!clienteForm.get('Numero').value && clienteForm.get('Numero').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                  </tr>
+                  <tr> 
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width">
+                          <input formControlName="Complemento" matTooltip="Informe o complemento" matInput placeholder="Complemento:">
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!clienteForm.get('Complemento').value && clienteForm.get('Complemento').touched"></span>  
+                        </mat-error>  
+                      </td>
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input matTooltip="Informe o bairro"formControlName="Bairro" matInput placeholder="Bairro:">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!clienteForm.get('Bairro').value && clienteForm.get('Bairro').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="Estado" matTooltip="Informe o estado" matInput placeholder="Estado:">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!clienteForm.get('Estado').value && clienteForm.get('Estado').touched"></span>  
+                      </mat-error>  
+                    </td>
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="Cidade" matTooltip="Informe o cidade" matInput placeholder="Cidade:">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!clienteForm.get('Cidade').value && clienteForm.get('Cidade').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                  </tr>  
+                  <tr>  
+                    <td></td>  
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Submit"[disabled]="!clienteForm.valid">Salvar</button>      
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Limpar" (click)="resetForm()">Limpar</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{message}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>  
+    <br><br>  
+          <table class="table" >  
+              <tr ngclass="btn-primary">
+                <th class="tbl2">Nome</th>
+                <th class="tbl2">Data de nascimento</th>  
+                <th class="tbl2">Sexo</th>  
+                <th class="tbl2">CEP</th>  
+                <th class="tbl2">Endereço</th>  
+                <th class="tbl2">Número</th>
+                <th class="tbl2">Complemento</th>
+                <th class="tbl2">Bairro</th>
+                <th class="tbl2">Estado</th>
+                <th class="tbl2">Cidade</th>
+                <th class="tbl2">Edit</th>  
+                <th class="tbl2">Delete</th>  
+              </tr>  
+              <tr *ngFor="let cliente of todosClientesLista | async">
+                <td class="tbl2">{{cliente.Nome}}</td>
+                <td class="tbl2">{{cliente.DataDeNascimento | date}}</td>  
+                <td class="tbl2">{{cliente.Sexo === 0 ? 'Masculino' : 'Feminino'}}</td>  
+                <td class="tbl2">{{cliente.Cep}}</td>  
+                <td class="tbl2">{{cliente.Endereco}}</td>  
+                <td class="tbl2">{{cliente.Numero}}</td>
+                <td class="tbl2">{{cliente.Complemento}}</td>
+                <td class="tbl2">{{cliente.Bairro}}</td>
+                <td class="tbl2">{{cliente.Estado}}</td>
+                <td class="tbl2">{{cliente.Cidade}}</td>
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="carregarCliente(cliente.Id)">Edit</button>  
+                </td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deletarCliente(cliente.Id)">Delete</button>  
+                </td>  
+              </tr>  
+      
+            </table>  
+        </form>
+      </mat-card-content>
+    </mat-card>
+</div>
